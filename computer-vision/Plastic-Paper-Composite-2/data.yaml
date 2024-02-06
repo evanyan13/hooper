@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 2
+names: ['platic', 'paper']
+
+roboflow:
+  workspace: healthhack
+  project: plastic-paper-composite
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/healthhack/plastic-paper-composite/2
