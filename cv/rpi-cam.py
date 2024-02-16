@@ -6,7 +6,7 @@ from roboflow import Roboflow
 # Load Roboflow model
 rf = Roboflow(api_key="rz0A8V6lWKzJHGDrFe89")
 project = rf.workspace("healthhack").project("hop-tiny")
-version = project.version("3")
+version = project.version("4")
 model = version.model
 
 print("Model loaded successfully!")
@@ -27,10 +27,15 @@ libcamera_vid_cmd = [
 # Start the libcamera-vid process.
 process = subprocess.Popen(libcamera_vid_cmd, stdout=subprocess.PIPE, bufsize=10**8)
 
+frame_width = 640
+frame_height = 480
+prediction_width = 1280
+prediction_height = 1280g
+
 # Calculate the size of each frame.
 # For YUV420, the size is 1.5 times the width times the height because
 # the U and V (chroma) components are subsampled by a factor of 2.
-frame_size = int(640 * 480 * 1.5)
+frame_size = int(frame_width * frame_height * 1.5)
 
 try:
     while True:
@@ -57,9 +62,16 @@ try:
         
         print(predictions.json())
         
+        scale_x = frame_width / prediction_width
+        scale_y = frame_height / prediction_height
+        
         # Visualize predictions
         for prediction in predictions:
-            x, y, width, height = prediction['x'], prediction['y'], prediction['width'], prediction['height']
+            x = prediction['x'] * scale_x
+            y = prediction['y'] * scale_y
+            width = prediction['width'] * scale_x
+            height = prediction['height'] * scale_y
+            
             x1, y1 = int(x), int(y)
             x2, y2 = int(x + width), int(y + height)
             # Concatenate class label with confidence level rounded to two decimal points
