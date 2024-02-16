@@ -47,6 +47,10 @@ try:
 
         # Convert YUV420 to BGR for OpenCV processing.
         bgr_frame = cv2.cvtColor(yuv420p_frame, cv2.COLOR_YUV2BGR_I420)
+        
+        # Config inference setting
+        model.confidence = 20
+        model.overlap = 25
 
         # Perform inference
         predictions = model.predict(bgr_frame)
@@ -58,8 +62,10 @@ try:
             x, y, width, height = prediction['x'], prediction['y'], prediction['width'], prediction['height']
             x1, y1 = int(x), int(y)
             x2, y2 = int(x + width), int(y + height)
+            # Concatenate class label with confidence level rounded to two decimal points
+            label = f"{prediction['class']} ({round(prediction['confidence'], 2)})"
             cv2.rectangle(bgr_frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            cv2.putText(bgr_frame, prediction['class'], (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
+            cv2.putText(bgr_frame, label, (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
 
         # Display the frame.
         cv2.imshow('Frame', bgr_frame)
