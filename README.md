@@ -8,7 +8,9 @@ The Hop system leverages a custom object recognition model to differentiate betw
 
 ## Setup Instructions
 
-Please refer to the respective installation guide within each category.
+Please refer to the following installation guide within each category.
+- Object Detection Model (Computer Vision): [Setup Guide](https://github.com/evanyan13/hooper/blob/main/cv/setup-guide.md)
+- Hardware: [Setup Guide](https://github.com/evanyan13/hooper/blob/main/hardware/setup-guide.md)
 
 ## Usage
 
