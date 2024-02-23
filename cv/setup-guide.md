@@ -26,18 +26,9 @@ pip install -r requirements.txt
 
 This command will install all necessary Python libraries, including OpenCV, Matplotlib, and the Ultralytics YOLO package.
 
-### Model Setup
+### Model Setup and Training
 
-1. **Download Pre-trained Models:**
-
-   Make sure to download the necessary pre-trained model files and place them in the `src` directory. These files include:
-
-   - `ssd_mobilenet_v3_large_coco_2020_01_14.pbtxt`
-   - `frozen_inference_graph.pb`
-
-2. **Label Files:**
-
-   Ensure the `labels.txt` file, containing class labels for detected objects, is placed in the `src` directory.
+Refer to [yolov5.ipynb](https://github.com/evanyan13/hooper/blob/main/cv/yolov5.ipynb) for model installation and training
 
 ## Usage
 
